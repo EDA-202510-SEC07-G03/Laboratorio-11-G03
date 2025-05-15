@@ -23,7 +23,9 @@ def new_vertex(key, value):
     .. include:: code-examples/Graph/vertex/new_vertex.rst
 
     """
-    vertex = {"key": key, "value": value, "adjacents": mp.new_map(0, 0.5)}
+    vertex = {"key": key, "value": {"key": key, "value": value, "adjacents": mp.new_map(0, 0.5)}}
+    print("######VERTEX######")
+    print(vertex)
     return vertex
 
 
@@ -83,7 +85,7 @@ def get_adjacents(vertex):
 
     .. include:: code-examples/Graph/vertex/get_adjacents.rst
     """
-    return vertex["adjacents"]
+    return vertex["value"]["adjacents"]
 
 
 def get_edge(vertex, key_v):
@@ -99,7 +101,7 @@ def get_edge(vertex, key_v):
 
     .. include:: code-examples/Graph/vertex/get_edge.rst
     """
-    return mp.get(vertex["adjacents"], key_v)
+    return mp.get(vertex['value']["adjacents"], key_v)
 
 
 def add_adjacent(vertex, key_vertex, weight):
@@ -120,7 +122,7 @@ def add_adjacent(vertex, key_vertex, weight):
 
     """
     new_edge = edg.new_edge(key_vertex, weight)
-    vertex["adjacents"] = mp.put(vertex["adjacents"], key_vertex, new_edge)
+    vertex['value']["adjacents"] = mp.put(vertex['value']["adjacents"], key_vertex, new_edge)
     return vertex
 
 
@@ -136,4 +138,5 @@ def degree(vertex):
 
     .. include:: code-examples/Graph/vertex/degree.rst
     """
-    return mp.size(vertex["adjacents"])
+    print(vertex)
+    return mp.size(vertex['value']["adjacents"])

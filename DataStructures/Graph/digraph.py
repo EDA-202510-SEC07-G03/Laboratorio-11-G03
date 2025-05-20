@@ -106,8 +106,7 @@ def get_vertex(my_graph, key_u):
         raise Exception("El vertice no existe")
     return lp.get(my_graph["vertices"], key_u)
 
-def dfs(my_graph, source):
-    pass
+
 
     
     

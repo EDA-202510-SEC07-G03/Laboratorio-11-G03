@@ -98,3 +98,24 @@ def get_first_priority(my_heap):
     first = my_heap["elements"]["elements"][1]
     value = pqe.get_index(first)
     return value
+
+def del_min(my_heap):
+
+    if is_empty(my_heap):
+        return None
+
+    elements = my_heap["elements"]["elements"]
+    min_node = elements[1]
+
+    # Reorganizar heap
+    al.exchange(my_heap["elements"], 1, my_heap["size"])
+    al.remove_last(my_heap["elements"])
+    my_heap["size"] -= 1
+
+    if not is_empty(my_heap):
+        sink(my_heap, 1)
+
+    return {
+        "key": pqe.get_index(min_node),
+        "priority": pqe.get_key(min_node)
+    }
